@@ -7,13 +7,13 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository
+@Repository("boardDAO")
 public class BoardDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
 	
 	public List<Map<String,Object>> selectBoardList() {
-		return sqlSession.selectList("Client.selectLayersId");
+		return sqlSession.selectList("Board.selectBoardList");
 	}
 }

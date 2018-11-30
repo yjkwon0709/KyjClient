@@ -36,7 +36,7 @@
 		<property name="logFormatter">
 			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
 				<property name="loggingType"	value="MULTI_LINE"/>
-				<property name="sqlPrefix"		value="SQL   :::::" />
+				<property name="sqlPrefix"		value="SQL   :::::  " />
 			</bean>
 		</property>
 	</bean>
@@ -48,17 +48,19 @@
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:/mybatis/mybatis-config.xml" />
-		<!-- <property name="mapperLocations" value="classpath:sqlmap/**/*.xml" /> -->
+		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
+		<property name="mapperLocations" value="classpath:sqlmap/*Mapper.xml" />
+		<!-- <property name="mapperLocations" value="classpath:sqlmap/*Mapper.xml" /> -->
+		<!-- <property name="mapperLocations" value="classpath:sqlmap/**/*Mapper.xml" /> -->
 		<!-- <property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml" /> -->
 	</bean>
 	
 	
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
-		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
 	
-	<context:component-scan base-package="com.kyj.*" />
+	<context:component-scan base-package="com.kyj"/>
 		<!-- <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
